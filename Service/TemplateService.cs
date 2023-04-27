@@ -55,5 +55,46 @@ namespace reports_app_backend.Service
         {
             return _dbContext.TemplateDatas.FirstOrDefault(i => i.Id == templateId);
         }
+
+        public void CreateTemplate(TemplateData templateData)
+        {
+            var fieldsJson = JsonSerializer.Serialize(templateData.Fields);
+
+            var newTemplateData = new TemplateData
+            {
+                Name = templateData.Name,
+                Description = templateData.Description,
+                Fields = fieldsJson
+            };
+            _dbContext.TemplateDatas.Add(newTemplateData);
+            _dbContext.SaveChanges();
+        }
+
+        public async Task<TemplateData> EditTemplate(int id, string name, string description, List<Dictionary<string, string>> fields)
+        {
+            var templateData = await _dbContext.TemplateDatas.FindAsync(id);
+            if(templateData == null)
+            {
+                throw new ArgumentException($"Template with id {id} was not found");
+            }
+
+            templateData.Name = name;
+            templateData.Description = description;
+            templateData.Fields = JsonSerializer.Serialize(fields);
+            
+            await _dbContext.SaveChangesAsync();
+            return templateData;
+        }
+
+        public void DeleteTemplate(int id)
+        {
+            var templateData = _dbContext.TemplateDatas.Find(id);
+            if(templateData == null )
+            {
+                throw new ArgumentException($"Template with id {id} was not found");
+            }
+            _dbContext.TemplateDatas.Remove(templateData);
+            _dbContext.SaveChanges();
+        }
     }
 }
