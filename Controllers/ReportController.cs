@@ -41,8 +41,6 @@ namespace reports_app_backend.Controllers
         }
 
         //Gives me an error 500 but still manages to create new reports from the existing templates
-        //The error comes from the url wanting to use the methods params "/CreateReport/{templateId}/reportname/reportdescription"
-        //Still an issue lol
         [HttpPost]
         [Route("/CreateReport/{templateId}")]
         public async Task<ActionResult<Report>> CreateReport(int templateId, string reportName, string reportDescription)
@@ -56,7 +54,9 @@ namespace reports_app_backend.Controllers
 
             try
             {
-                return CreatedAtAction(nameof(GetReport), new { id = createdReport.Id }, createdReport);
+                //After googling, this seems to be the root of the issue
+                return CreatedAtAction(nameof(CreateReport), new { id = createdReport.Id }, createdReport);
+                //return CreatedAtAction("CreateReport", new { createdReport.Id }, createdReport);
             }
             catch (InvalidOperationException ex)
             {
