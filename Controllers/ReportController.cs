@@ -20,11 +20,6 @@ namespace reports_app_backend.Controllers
 
         [HttpGet]
         [Route("/GetAllReports")]
-        //public ActionResult<Task<List<Report>>> GetAllReports()
-        //{
-        //    var reports = _reportService.GetAllReports();
-        //    return Ok(reports);
-        //}
         public ActionResult<IEnumerable<Report>> GetAllReports()
         {
             var reports = _reportService.GetAllReports();

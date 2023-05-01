@@ -4,7 +4,6 @@ namespace reports_app_backend.Service.Interfaces
 {
     public interface ITemplateService
     {
-        //void CreateBugReportTemplate();
         TemplateData GetTemplateData(int id);
         IEnumerable<TemplateData> GetAllTemplates();
         void CreateTemplate(TemplateData templateData);

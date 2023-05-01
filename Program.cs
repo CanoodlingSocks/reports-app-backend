@@ -17,7 +17,6 @@ var app = builder.Build();
 
 var scope = app.Services.CreateScope();
 var templateService = scope.ServiceProvider.GetService<TemplateService>();
-//templateService.CreateBugReportTemplate();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
