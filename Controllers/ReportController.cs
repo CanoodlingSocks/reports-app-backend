@@ -60,7 +60,7 @@ namespace reports_app_backend.Controllers
             }
             catch (InvalidOperationException ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while generating the URL for the newly created report.");
+                return BadRequest("An error occurred while processing the request: " + ex.Message);
             }
         }
 
