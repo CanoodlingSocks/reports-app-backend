@@ -45,7 +45,9 @@ namespace reports_app_backend.Controllers
             return Ok(report);
         }
 
-        //Gives me an error 500 but still manages to create new reports from the existing templates??
+        //Gives me an error 500 but still manages to create new reports from the existing templates
+        //The error comes from the url wanting to use the methods params "/CreateReport/{templateId}/reportname/reportdescription"
+        //Still an issue lol
         [HttpPost]
         [Route("/CreateReport/{templateId}")]
         public async Task<ActionResult<Report>> CreateReport(int templateId, string reportName, string reportDescription)
