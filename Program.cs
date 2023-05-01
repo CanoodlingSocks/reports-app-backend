@@ -11,6 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ReportsDBContext>();
 builder.Services.AddScoped<TemplateService, TemplateService>();
+builder.Services.AddScoped<ReportService, ReportService>();
 
 var app = builder.Build();
 
